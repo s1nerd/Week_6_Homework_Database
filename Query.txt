@@ -1,0 +1,70 @@
+* Query Create Table Barang *
+
+CREATE TABLE Barang (
+id serial PRIMARY KEY,
+kategori_id integer REFERENCES category(id),
+nama varchar(255) NOT NULL,
+deskripsi varchar(255),
+harga integer,
+stok integer
+);
+-----------------------------------------------------------------------------------------------------------------
+
+* Query Create Table category *
+
+CREATE TABLE category (
+id serial PRIMARY KEY,
+nama varchar(255) NOT NULL
+);
+-----------------------------------------------------------------------------------------------------------------
+
+* Query Select From barang *
+
+SELECT * FROM Barang;
+
+SELECT nama, harga FROM barang WHERE stok > 50;
+-----------------------------------------------------------------------------------------------------------------
+
+* Query Insert From barang *
+
+INSERT INTO barang (id, kategori_id, nama, deskripsi, harga, stok)
+VALUES 
+(3, 2, ‘Power Ranger’, ‘Mainan Dengan Ranger Merah Menyala’, 15000000, 10);
+-----------------------------------------------------------------------------------------------------------------
+
+* Query update From barang *
+
+UPDATE barang
+SET nama = ‘Kamen Rider’
+WHERE id = 4;
+-----------------------------------------------------------------------------------------------------------------
+
+* Query Select From category *
+
+SELECT * FROM category;
+-----------------------------------------------------------------------------------------------------------------
+
+* Query Insert From category *
+
+INSERT INTO category (id, nama)
+VALUES 
+(3, ‘Boneka’);
+-----------------------------------------------------------------------------------------------------------------
+
+* Query update From category *
+
+UPDATE category
+SET nama = ‘Robot’
+WHERE id = 2;
+-----------------------------------------------------------------------------------------------------------------
+
+* Query untuk melakukan join relasi antara barang dan category *
+
+SELECT Barang.id, Barang.nama, Barang.deskripsi, Barang.harga, Barang.stok, category.nama AS category
+FROM Barang
+INNER JOIN category ON Barang.kategori_id = Category.id;
+-----------------------------------------------------------------------------------------------------------------
+
+Query Delete :
+
+DELETE FROM barang WHERE id = 2;
